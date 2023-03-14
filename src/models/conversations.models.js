@@ -24,5 +24,12 @@ const Conversations = db.define("conversations",{
         allowNull: false,
         field: "users_id"
 
-    }
-})
+    },
+
+},
+{
+    timestamps: false,
+    updatedAt: false,
+    
+});
+module.exports = Conversations;
