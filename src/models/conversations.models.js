@@ -16,10 +16,13 @@ const Conversations = db.define("conversations",{
     typeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        field: "type-id",
+        field: "type_id",
 
     },
-    idUsers: {
+    usersId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: "users_id"
 
     }
 })
