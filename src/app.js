@@ -4,6 +4,9 @@ const morgan = require("morgan");
 const db = require("./utils/database");
 const initModel = require("./models/initModels");
 const userRoute = require("./routes/user.route");
+const conversationRoute = require("./routes/conversations.route");
+const messageRoute = require("./routes/messages.route");
+const userConversation = require("./routes/userConversation.route")
 const authRoute = require("./routes/auth.route");
 const errorHandlerRoute = require("./routes/errorHandler.route");
 initModel();
@@ -25,8 +28,11 @@ db.sync({alter: true})
 .then(()=> console.log("Base de datos sync"))
 .catch((error)=> console.log(error))
 
-app.use(userRoute);
 app.use(authRoute);
+app.use(userRoute);
+app.use(conversationRoute);
+app.use(messageRoute);
+app.use(userConversation);
 
 errorHandlerRoute(app);
 

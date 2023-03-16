@@ -1,4 +1,6 @@
 const Users = require("../models/users.models");
+const Participants = require("../models/userConversation.models");
+const Conversations = require("../models/conversations.models")
 
 class UserServices {
   static async create(data) {
@@ -14,6 +16,7 @@ class UserServices {
     try {
       const user = await Users.findAll({
         attributes: ["id", "email", "password"],
+        
       });
       return user;
     } catch (error) {
@@ -31,6 +34,30 @@ class UserServices {
       throw err;
     }
   }
+
+  static async getOneUser(id){
+    try {
+      
+      const result = await Users.findByPk(id,{
+     
+        attributes: ["id", "userName", "email"],
+        include: [
+         {
+           model: Participants,
+           attributes: { exclude: ["createdAt", "updatedAt"] },
+            include:{
+              model: Conversations
+            }
+         },
+         
+        ],
+      });
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+
 }
 
 module.exports = UserServices;

@@ -27,7 +27,23 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
+const getConversations = async(req, res, next)=>{
+  try {
+    const {id} = req.params;
+    const result = await UserServices.getOneUser(id);
+    res.status(200).json({
+      status:"succes",
+      result
+    })
+    
+  } catch (error) {
+    next(error)
+  }
+
+}
+
 module.exports = {
   createUser,
   getAllUsers,
+  getConversations,
 };
